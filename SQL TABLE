@@ -1,0 +1,103 @@
+/* 1-----------Professor Table -------------*/
+CREATE TABLE Professor(
+SSN INT (11) NOT NULL,
+Title VARCHAR(20),
+Salary INT(9),
+Sex VARCHAR(6),
+P_name VARCHAR(50),
+Area_code INT(3),
+Phone_number varchar(10),
+City VARCHAR(50),
+Zip INT(5),
+State VARCHAR(2),
+Street_Address VARCHAR(50),
+PRIMARY KEY(SSN));
+
+/*Foreign Key
+P_DNUM INT(8))*/
+
+INSERT INTO Professor VALUES
+(123456789,"Professor","60000","Male","Jordan Andia",714,"555-1234","Fullerton",92808,"CA","10 Main st"),
+(123456788,"Professor","65000","Male","Aedan Valle",714,"555-1233","Brea",92807,"CA","20 college way"),
+(123456787,"Professor","70000","Female","Danny Cristea",714,"555-1232","Anaheim",92806,"CA","20 park ave");
+
+SELECT *
+FROM Professor;
+
+/*2----------Department Table------------*/
+CREATE TABLE Department(
+Unique_number INT(8) NOT NULL,
+name VARCHAR(50),
+telephone INT(11),
+Office_Location VARCHAR(50),
+PRIMARY KEY(Unique_number));
+
+INSERT INTO Department VALUES(10,"Math",7145001,"MATH-10"),(20,"Computer Science",714002,"CS-20");
+
+SELECT* 
+from Department;
+
+/* 3-------- Minor Table-------- */
+CREATE TABLE Minor(
+/*Foreign Keys*/
+M_Unique_number INT(8),
+M_CWID INT(9));
+
+/* 4--------Student Table--------- */
+CREATE TABLE Student(
+CWID INT(9),
+Address VARCHAR(50),
+Phone VARCHAR(15),
+Last_name VARCHAR(50),
+First_name VARCHAR(50),
+PRIMARY KEY(CWID)
+/*Foreign Key
+S_NUM INT(8)*/);
+
+INSERT INTO Student VALUES
+(654321,"100 East First st","714-555-1001","Nye","Bill"),(654322,"200 West Second st","714-555-1002","Newton","Issac"),(654323,"300 South Third st","714-555-1003","Tyson","Neil"),(654324,"400 North Fourth st","714-555-1004","Einstein","Albert"),(654325,"500 East Fifth st","714-555-1005","Xavier","Charles"),(654326,"600 West  sixth st","714-555-1006","Stark","Tony"),(654327,"700 South seventh st","714-555-1007","Banner","Bruce"),(654328,"800 North Eigth st","714-555-1008","Perry","Katy");
+SELECT *
+FROM Student;
+
+/* 5----------- Enrollment Table-------------*/
+CREATE TABLE Enrollment(
+Grade VARCHAR (2),
+E_sec_number INT (9),
+E_CWID INT (9)
+
+);
+
+INSERT INTO Enrollment VALUES("A-",654321,1),("B+",654322,3),("C",654323,2),("A",654324,3),("A+",654325,5),("B",654326,6),("C",654327,4),("D",654328,3),("F",654321,2),("C+",654322,3),("A-",654323,1),("A",654324,1),("B",654325,2),("C",654326,3),("B",654327,6),("D-",654328,6),("C-",654321,5),("A",654322,4),("B+",654324,3);
+SELECT *
+FROM Enrollment;
+
+/* 6-------Course Table--------- */
+CREATE TABLE Course(
+Course_number VARCHAR(10),
+title VARCHAR(20),
+textbook VARCHAR(50),
+units INT(10),
+/*Foreign Key*/
+Pre_CN VARCHAR(4));
+
+INSERT INTO Course VALUES
+("CS100","INTRO TO CS","CS 101",1,"NULL"),("CS200","COMPUTER SCIENCE","CS 201",2,"CS100"),("MATH100","INTRO TO MATH","MATH 101",1,"NULL"),("MATH200","MATH","MATH 201",3,"CS200");
+SELECT *
+FROM Course;
+
+/* 7---------Sections Table---------- */
+CREATE TABLE SECTIONS(
+Section_number INT(9),
+Begin_time VARCHAR(5),
+End_time VARCHAR(5),
+Classroom INT(6),
+Number_of_seats INT(3),
+Meeting_days VARCHAR(10),
+/*,
+S_Course_number INT(4),*/
+PRIMARY KEY(Section_number));
+INSERT INTO SECTIONS VALUES(3,"11am","12pm",1,30,"MW"),(4,"12pm","1pm",2,30,"TH"),(5,"1pm","2pm",2,30,"TH"),(6,"2pm","3pm",2,30,"TH");
+SELECT *
+FROM SECTIONS;
+
+
