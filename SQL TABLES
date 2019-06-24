@@ -1,4 +1,3 @@
-
 /*========================== start of section professor==============*/
 
 CREATE TABLE Professor(
@@ -29,9 +28,9 @@ INSERT INTO Professor (SSN, Title, Salary, Sex, P_name, Area_code, Phone_number,
 
 /*========================== start of section College degrees ==============*/
 CREATE TABLE College_degrees(
-PSSN INT (11) NOT NULL,
+PSSN INT (11),
 num_college_degrees INT(10),
-FORIEGN KEY (PSSN) references Professor(SSN));
+FOREIGN KEY (PSSN) REFERENCES Professor(SSN));
 
 INSERT INTO College_degrees (PSSN, num_college_degrees) VALUES
     (123456789,  4   ),
@@ -52,7 +51,7 @@ PRIMARY KEY(Unique_number),
 FOREIGN KEY (PSSN) REFERENCES Professor(SSN)
 );
 
-//— all inserts
+/*— all inserts*/
 
 
 INSERT INTO Department (Unique_number, name, telephone, Office_Location, PSSN) VALUES(10,"Math",7145001,"MATH-10", 123456789 ),
@@ -208,15 +207,3 @@ INSERT INTO Enrollment (Grade, E_CWID, E_sec_number ) VALUES
 
 
 /*========================== end of section Enrollment ==============*/
-
-
-/* -- these are all the queries!!!!!!!!!!*/
-
-
-SELECT title, Classroom, Meeting_days, Begin_time, End_time
-FROM SECTIONS, Professor
-WHERE SSN= 123456789 AND SECTIONS.PSSN=Professor.SSN;
-
-SELECT title, Classroom, Meeting_days, Begin_time, End_time
-FROM SECTIONS, Professor
-WHERE SSN= 123456789 AND PSSN = SSN;
