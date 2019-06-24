@@ -1,6 +1,7 @@
 /*Student Query---*/
 /*a*/
-SELECT Section_number, Classroom, Meeting_days, Begin_time, End_time, Course_number, New_CN, COUNT(E_CWID)
+SELECT Section_number, Classroom, Meeting_days, Begin_time, End_time, COUNT(E_CWID)
 FROM SECTIONS, Course, Enrollment, Student
-WHERE Course_number=New_CN AND CWID=E_CWID AND E_sec_number=Section_number
+WHERE Course_number=New_CN AND CWID=E_CWID AND E_sec_number=Section_number AND Course_number="CS100"
+/*Change Course_number=<user input>*/
 GROUP BY Section_number;
