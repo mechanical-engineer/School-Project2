@@ -1,0 +1,24 @@
+select*
+from College_degrees;
+
+select*
+from Course;
+
+
+select*
+from Department;
+
+select*
+from Enrollment;
+
+select*
+from Minor;
+
+select*
+from Professor;
+
+select*
+from SECTIONS;
+
+select*
+from Student;
