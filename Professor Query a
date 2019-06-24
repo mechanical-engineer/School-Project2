@@ -1,0 +1,5 @@
+/*Professor Queries---*/
+/*a*/
+SELECT title, Classroom, Meeting_days, Begin_time, End_time
+FROM SECTIONS, Professor
+WHERE SSN= 123456789 AND PSSN = SSN;
