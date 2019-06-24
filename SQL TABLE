@@ -1,4 +1,6 @@
-/* 1-----------Professor Table -------------*/
+
+/*========================== start of section professor==============*/
+
 CREATE TABLE Professor(
 SSN INT (11) NOT NULL,
 Title VARCHAR(20),
@@ -13,79 +15,131 @@ State VARCHAR(2),
 Street_Address VARCHAR(50),
 PRIMARY KEY(SSN));
 
-/*Foreign Key
-P_DNUM INT(8))*/
 
-INSERT INTO Professor VALUES
+/*— all inserts… */
+
+INSERT INTO Professor (SSN, Title, Salary, Sex, P_name, Area_code, Phone_number, City, Zip, State, Street_Address) VALUES
 (123456789,"Professor","60000","Male","Jordan Andia",714,"555-1234","Fullerton",92808,"CA","10 Main st"),
 (123456788,"Professor","65000","Male","Aedan Valle",714,"555-1233","Brea",92807,"CA","20 college way"),
 (123456787,"Professor","70000","Female","Danny Cristea",714,"555-1232","Anaheim",92806,"CA","20 park ave");
 
-SELECT *
-FROM Professor;
 
-/*2----------Department Table------------*/
+/*========================== end of section professor==============*/
+
+
+/*========================== start of section College degrees ==============*/
+CREATE TABLE College_degrees(
+PSSN INT (11) NOT NULL,
+num_college_degrees INT(10),
+FORIEGN KEY (PSSN) references Professor(SSN));
+
+INSERT INTO College_degrees (PSSN, num_college_degrees) VALUES
+    (123456789,  4   ),
+    (123456788,  2   ),
+    (123456787,   5  );
+/*========================== end of section College degrees==============*/
+
+
+/*========================== start of section Department==============*/
 CREATE TABLE Department(
 Unique_number INT(8) NOT NULL,
 name VARCHAR(50),
 telephone INT(11),
 Office_Location VARCHAR(50),
-PRIMARY KEY(Unique_number));
+PSSN INT (11) , 
+SCWID INT (9),
+PRIMARY KEY(Unique_number),
+FOREIGN KEY (PSSN) REFERENCES Professor(SSN)
+);
 
-INSERT INTO Department VALUES(10,"Math",7145001,"MATH-10"),(20,"Computer Science",714002,"CS-20");
+//— all inserts
 
-SELECT* 
-from Department;
 
-/* 3-------- Minor Table-------- */
-CREATE TABLE Minor(
-/*Foreign Keys*/
-M_Unique_number INT(8),
-M_CWID INT(9));
+INSERT INTO Department (Unique_number, name, telephone, Office_Location, PSSN) VALUES(10,"Math",7145001,"MATH-10", 123456789 ),
+(20,"Computer Science",714002,"CS-20", 123456787);
 
-/* 4--------Student Table--------- */
+/*========================== end of section Department==============*/
+
+
+/*========================== start of section Student==============*/
 CREATE TABLE Student(
 CWID INT(9),
 Address VARCHAR(50),
 Phone VARCHAR(15),
 Last_name VARCHAR(50),
 First_name VARCHAR(50),
-PRIMARY KEY(CWID)
-/*Foreign Key
-S_NUM INT(8)*/);
+DNUM INT(8),
+PRIMARY KEY(CWID),
+FOREIGN KEY (DNUM) REFERENCES Department (Unique_number)
+ );
 
-INSERT INTO Student VALUES
-(654321,"100 East First st","714-555-1001","Nye","Bill"),(654322,"200 West Second st","714-555-1002","Newton","Issac"),(654323,"300 South Third st","714-555-1003","Tyson","Neil"),(654324,"400 North Fourth st","714-555-1004","Einstein","Albert"),(654325,"500 East Fifth st","714-555-1005","Xavier","Charles"),(654326,"600 West  sixth st","714-555-1006","Stark","Tony"),(654327,"700 South seventh st","714-555-1007","Banner","Bruce"),(654328,"800 North Eigth st","714-555-1008","Perry","Katy");
-SELECT *
-FROM Student;
+/*— all inserts*/
 
-/* 5----------- Enrollment Table-------------*/
-CREATE TABLE Enrollment(
-Grade VARCHAR (2),
-E_sec_number INT (9),
-E_CWID INT (9)
 
+INSERT INTO Student (CWID, Address, Phone, Last_name, First_name, DNUM) VALUES
+(654321,"100 East First st","714-555-1001","Nye","Bill", 10),
+(654322,"200 West Second st","714-555-1002","Newton","Issac", 10),
+(654323,"300 South Third st","714-555-1003","Tyson","Neil", 10),
+(654324,"400 North Fourth st","714-555-1004","Einstein","Albert", 10),
+(654325,"500 East Fifth st","714-555-1005","Xavier","Charles", 20),
+(654326,"600 West  sixth st","714-555-1006","Stark","Tony", 20),
+(654327,"700 South seventh st","714-555-1007","Banner","Bruce", 20),
+(654328,"800 North Eigth st","714-555-1008","Perry","Katy", 20);
+
+
+/*========================== end of section Student==============*/
+
+/*========================== start of section Minor ==============*/
+
+CREATE TABLE Minor (
+U_num INT (8),
+SCWID INT (9),
+foreign key (U_num) references Department(Unique_number),
+foreign key (SCWID) references Student (CWID)
 );
 
-INSERT INTO Enrollment VALUES("A-",654321,1),("B+",654322,3),("C",654323,2),("A",654324,3),("A+",654325,5),("B",654326,6),("C",654327,4),("D",654328,3),("F",654321,2),("C+",654322,3),("A-",654323,1),("A",654324,1),("B",654325,2),("C",654326,3),("B",654327,6),("D-",654328,6),("C-",654321,5),("A",654322,4),("B+",654324,3);
-SELECT *
-FROM Enrollment;
+INSERT into Minor (U_num, SCWID) VALUES
 
-/* 6-------Course Table--------- */
+    (20, 654321),
+    (10, 654326),
+    (10, 654328),
+    (20, 654324);
+
+/*========================== end of section Minor==============*/
+
+
+
+
+/*========================== start of section Course==============*/
+
 CREATE TABLE Course(
 Course_number VARCHAR(10),
 title VARCHAR(20),
 textbook VARCHAR(50),
 units INT(10),
-/*Foreign Key*/
-Pre_CN VARCHAR(4));
+Pre_CN VARCHAR(10),
+PRIMARY KEY (Course_number),
+FOREIGN KEY (Pre_CN) references Course (Course_number)
+);
 
-INSERT INTO Course VALUES
-("CS100","INTRO TO CS","CS 101",1,"NULL"),("CS200","COMPUTER SCIENCE","CS 201",2,"CS100"),("MATH100","INTRO TO MATH","MATH 101",1,"NULL"),("MATH200","MATH","MATH 201",3,"CS200");
-SELECT *
-FROM Course;
+/*— all inserts*/
 
-/* 7---------Sections Table---------- */
+INSERT INTO Course (Course_number, title, textbook, units, Pre_CN) VALUES
+("CS100","INTRO TO CS","CS 101",1, NULL),
+("CS200","COMPUTER SCIENCE","CS 201",2, "CS100"),
+("MATH100","INTRO TO MATH","MATH 101",1, NULL),
+("MATH200","MATH","MATH 201",3, "MATH100");
+
+
+/*— alter table commands*/
+
+
+/*========================== end of section Course ==============*/
+
+
+/*========================== start of section SECTIONS ==============*/
+
+
 CREATE TABLE SECTIONS(
 Section_number INT(9),
 Begin_time VARCHAR(5),
@@ -93,11 +147,76 @@ End_time VARCHAR(5),
 Classroom INT(6),
 Number_of_seats INT(3),
 Meeting_days VARCHAR(10),
-/*,
-S_Course_number INT(4),*/
-PRIMARY KEY(Section_number));
-INSERT INTO SECTIONS VALUES(3,"11am","12pm",1,30,"MW"),(4,"12pm","1pm",2,30,"TH"),(5,"1pm","2pm",2,30,"TH"),(6,"2pm","3pm",2,30,"TH");
-SELECT *
-FROM SECTIONS;
+New_CN VARCHAR(10),
+PSSN INT(11),
+PRIMARY KEY(Section_number),
+FOREIGN KEY (New_CN) references Course(Course_number),
+FOREIGN KEY (PSSN) references Professor(SSN));
+
+/*— all inserts*/
 
 
+INSERT INTO SECTIONS (Section_number, Begin_time, End_time, Classroom, Number_of_seats, Meeting_days, New_CN, PSSN) VALUES
+(1, "8am", "9am", 1, 30, "MW", "CS100",123456789),
+(2, "9am", "10am", 1, 30, "MW", "CS100",123456789),
+(3,"11am","12pm",1,30,"MW", "CS200",123456788),
+(4,"12pm","1pm",2,30,"TH", "MATH100",123456788),
+(5,"1pm","2pm",2,30,"TH", "MATH200",123456787),
+(6,"2pm","3pm",2,30,"TH", "MATH200",123456787);
+
+
+
+
+
+/*========================== end of section SECTIONS ==============*/
+
+
+/*========================== start of section Enrollment==============*/
+
+CREATE TABLE Enrollment(
+Grade VARCHAR (2),
+E_sec_number INT (9),
+E_CWID INT (9),
+FOREIGN KEY (E_sec_number) references SECTIONS (Section_number),
+FOREIGN KEY (E_CWID) references Student (CWID)
+);
+
+/*— all inserts*/
+
+INSERT INTO Enrollment (Grade, E_CWID, E_sec_number ) VALUES
+("A-", 654321, 1),
+("B+",654322,3),
+("C",654323,2),
+("A",654324,3),
+("A+",654325,5),
+("B",654326,6),
+("C",654327,4),
+("D",654328,3),
+("F",654321,2),
+("C+",654322,4),
+("A-",654323,1),
+("A",654324,1),
+("B",654325,2),
+("C",654326,4),
+("B",654327,6),
+("D-",654328,6),
+("C-",654321,5),
+("A",654322,4),
+("B+",654324,3),
+("B+", 654324,5);
+
+
+
+/*========================== end of section Enrollment ==============*/
+
+
+/* -- these are all the queries!!!!!!!!!!*/
+
+
+SELECT title, Classroom, Meeting_days, Begin_time, End_time
+FROM SECTIONS, Professor
+WHERE SSN= 123456789 AND SECTIONS.PSSN=Professor.SSN;
+
+SELECT title, Classroom, Meeting_days, Begin_time, End_time
+FROM SECTIONS, Professor
+WHERE SSN= 123456789 AND PSSN = SSN;
