@@ -1,6 +1,7 @@
-/*Professor Queries---*/
+/*Professor Query---*/
 /*b*/
-SELECT COUNT(*),Grade 
+SELECT COUNT(*),Grade
 FROM Enrollment, SECTIONS, Course
-WHERE Enrollment.E_sec_number=SECTIONS.Section_number
+WHERE Enrollment.E_sec_number=SECTIONS.Section_number AND New_CN=Course_number AND Section_number=1 AND Course_number="CS100"
+/*Change Section_number=<user input> AND Course_number=<user input>*/
 GROUP BY Grade;
