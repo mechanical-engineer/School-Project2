@@ -2,4 +2,5 @@
 /*b*/
 SELECT CWID,Course_number, Grade
 FROM Student, Enrollment, Course, SECTIONS
-WHERE CWID="654321" AND E_CWID=CWID AND E_sec_number=Section_number AND New_CN=Course_number;
+WHERE E_CWID=CWID AND E_sec_number=Section_number AND New_CN=Course_number AND CWID="654321";
+/*Change CWID=<user input>*/
