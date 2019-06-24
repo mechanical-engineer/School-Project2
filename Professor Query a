@@ -1,5 +1,5 @@
 /*Professor Queries---*/
 /*a*/
-SELECT title, Classroom, Meeting_days, Begin_time, End_time
+SELECT title, Classroom, Meeting_days, Begin_time, End_time, SSN
 FROM SECTIONS, Professor
-WHERE SSN= 123456789 AND PSSN = SSN;
+WHERE SSN=PSSN AND PSSN= 123456789;/*Change PSSN=<user input>*/
