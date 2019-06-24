@@ -1,0 +1,6 @@
+/*Professor Queries---*/
+/*b*/
+SELECT COUNT(*),Grade 
+FROM Enrollment, SECTIONS, Course
+WHERE Enrollment.E_sec_number=SECTIONS.Section_number
+GROUP BY Grade;
