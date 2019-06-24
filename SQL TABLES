@@ -1,8 +1,9 @@
+
 /*========================== start of section professor==============*/
 
 CREATE TABLE Professor(
 SSN INT (11) NOT NULL,
-Title VARCHAR(20),
+Title VARCHAR(200),
 Salary INT(9),
 Sex VARCHAR(6),
 P_name VARCHAR(50),
@@ -18,9 +19,9 @@ PRIMARY KEY(SSN));
 /*— all inserts… */
 
 INSERT INTO Professor (SSN, Title, Salary, Sex, P_name, Area_code, Phone_number, City, Zip, State, Street_Address) VALUES
-(123456789,"Professor","60000","Male","Jordan Andia",714,"555-1234","Fullerton",92808,"CA","10 Main st"),
-(123456788,"Professor","65000","Male","Aedan Valle",714,"555-1233","Brea",92807,"CA","20 college way"),
-(123456787,"Professor","70000","Female","Danny Cristea",714,"555-1232","Anaheim",92806,"CA","20 park ave");
+(123456789,"Chairperson of Mathematics","60000","Male","Jordan Andia",714,"555-1234","Fullerton",92808,"CA","10 Main st"),
+(123456788,"Associate Professor","65000","Male","Aedan Valle",714,"555-1233","Brea",92807,"CA","20 college way"),
+(123456787,"Chairperson of Computer Science","70000","Female","Danny Cristea",714,"555-1232","Anaheim",92806,"CA","20 park ave");
 
 
 /*========================== end of section professor==============*/
