@@ -1,0 +1,5 @@
+/*Sample Foreign key demonstration 2
+/*This script provides the major of the student given the CWID*/
+SELECT name
+From Department, Minor, Student
+WHERE Minor.U_num=Department.Unique_number AND Student.CWID=Minor.SCWID AND Minor.SCWID="654321";
