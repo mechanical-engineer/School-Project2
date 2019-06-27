@@ -1,0 +1,5 @@
+/*Sample Foreign key demonstration 1
+/*This script provides the major of the student given the CWID*/
+SELECT name
+FROM Department, Student
+WHERE DNUM=Unique_number AND CWID="654321";
